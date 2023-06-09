@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid Name="DataUsers" ItemsSource="{Binding AppJson.Items}" AutoGenerateColumns="False" Margin="60,135,250,12" >
+        <DataGrid Name="DataUsers"  ItemsSource="{Binding Source = AppJson.Items, Mode=OneWay}" AutoGenerateColumns="False" Margin="60,135,250,12" IsSynchronizedWithCurrentItem="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="First Name"  Binding="{Binding FirstName }"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding LastName  }" />

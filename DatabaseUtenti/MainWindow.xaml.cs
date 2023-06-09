@@ -26,9 +26,6 @@ namespace DatabaseUtenti
             DataContext = new Database_Utenti_VM();
         }
 
-        private void filter_btn_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }

@@ -24,15 +24,24 @@ public class Database_Utenti_VM : INotifyPropertyChanged
             OnPropertyChanged(nameof(InputStringa));
         }
     }
-
-    public ICommand PassaStringaCommand { get; }
+    private ICommand _command;
+    public ICommand PassaStringaCommand
+    {
+        get
+        {
+            if (_command == null)
+                _command = new RelayCommand(PassaStringa);
+            return
+                _command;
+        }
+    }
     public FilterAppJson AppJson = new FilterAppJson();
 
     public Database_Utenti_VM()
     {
         AppJson.LoadData();
         ObservableCollection<Utenti> prova = AppJson.Items;
-        PassaStringaCommand = new RelayCommand(PassaStringa);
+        //PassaStringaCommand = new RelayCommand(PassaStringa);
     }
 
     private void PassaStringa()

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection;
 using System.Resources;
 using System.Text.RegularExpressions;
 
@@ -11,7 +12,7 @@ namespace LibreriaMFP
     {
         private Utenti Utenti =new Utenti();
 
-        private ObservableCollection<Utenti>? _items;
+        private ObservableCollection<Utenti>? _items = new ObservableCollection<Utenti>();
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
@@ -44,8 +45,15 @@ namespace LibreriaMFP
 
         public override void LoadData()
         {
-            string json = System.IO.File.ReadAllText(@"C:\Users\jhoxha\OneDrive - ALTEN Group\Documents\GitHub\Esercizi\MyFirstProject\LibreriaMFP\Resources\MOCK_DATA.json");
-            Items = JsonConvert.DeserializeObject<ObservableCollection<Utenti>>(json);
+            var ResourceName_MockData = Assembly.GetExecutingAssembly().GetManifestResourceNames().First(x => x == "LibreriaMFP.Resources.MOCK_DATA.json");
+            string jsonFile = "";
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(ResourceName_MockData))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                jsonFile = reader.ReadToEnd(); //Make string equal to full file
+            }
+            //string json = System.IO.File.ReadAllText(@"C:\Users\jhoxha\OneDrive - ALTEN Group\Documents\GitHub\Esercizi\MyFirstProject\LibreriaMFP\Resources\MOCK_DATA.json");
+            Items = JsonConvert.DeserializeObject<ObservableCollection<Utenti>>(jsonFile);
         }
 
         public override void StringFilter(string keyword, string field)
