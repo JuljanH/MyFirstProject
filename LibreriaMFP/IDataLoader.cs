@@ -5,11 +5,7 @@ namespace LibreriaMFP
 {
     public interface IDataLoader
     {
-        DataLoader LoadData();
+        void LoadData();
     }
 
-    public class DataLoader
-    {
-
-    }
 }

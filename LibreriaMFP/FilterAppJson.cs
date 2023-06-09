@@ -2,12 +2,16 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Resources;
+using System.Text.RegularExpressions;
 
 namespace LibreriaMFP
 {
     public class FilterAppJson : Filter_abstract, IDataLoader, INotifyPropertyChanged
     {
-        private ObservableCollection<Utenti> _items;
+        private Utenti Utenti =new Utenti();
+
+        private ObservableCollection<Utenti>? _items;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
@@ -38,18 +42,17 @@ namespace LibreriaMFP
             throw new NotImplementedException();
         }
 
-        public override DataLoader LoadData()
+        public override void LoadData()
         {
-            string json = System.IO.File.ReadAllText(@"\Resources\MOCK_DATA.json");
+            string json = System.IO.File.ReadAllText(@"C:\Users\jhoxha\OneDrive - ALTEN Group\Documents\GitHub\Esercizi\MyFirstProject\LibreriaMFP\Resources\MOCK_DATA.json");
             Items = JsonConvert.DeserializeObject<ObservableCollection<Utenti>>(json);
-            return Items;
         }
 
         public override void StringFilter(string keyword, string field)
         {
             var filteredItems = new ObservableCollection<Utenti>();
 
-            switch (field.ToLower())
+            switch (field)
             {
                 case "firstname":
                     filteredItems = new ObservableCollection<Utenti>(Items.Where(item => item.FirstName.Contains(keyword)));

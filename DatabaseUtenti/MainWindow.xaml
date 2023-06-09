@@ -3,20 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DatabaseUtenti"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid Name="DataUsers" ItemsSource="{Binding Items}" AutoGenerateColumns="False" Margin="60,135,250,12" >
+        <DataGrid Name="DataUsers" ItemsSource="{Binding AppJson.Items}" AutoGenerateColumns="False" Margin="60,135,250,12" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="First Name"  Binding="{Binding }"/>
-                <DataGridTextColumn Header="Last Name" Binding="{Binding }" />
-                <DataGridTextColumn Header="Email" Binding="{Binding }" />
-                <DataGridTextColumn Header="Ip_Address" Binding="{Binding }" />
-                <DataGridTextColumn Header="Gender" Binding="{Binding }" />
+                <DataGridTextColumn Header="First Name"  Binding="{Binding FirstName }"/>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName  }" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email }" />
+                <DataGridTextColumn Header="Ip_Address" Binding="{Binding Gender }" />
+                <DataGridTextColumn Header="Gender" Binding="{Binding Ip }" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="filter_btn" Content="Applica Filtro" Command="{Binding PassaStringaCommand}" Margin="615,82,73,311" Click="filter_btn_Click"/>
-        <TextBlock x:Name="input_txt" HorizontalAlignment="Left" Margin="74,85,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="35" Width="246"/>
+        <Button x:Name="filter_btn" Content="Applica Filtro" Command="{Binding PassaStringaCommand}" CommandParameter="{Binding ElementName=input_txt, Path=Text}" Margin="615,82,73,311"/>
+        <TextBox x:Name="input_txt" HorizontalAlignment="Left" Text="{Binding Path=InputStringa}" Margin="74,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="246"/>
     </Grid>
 </Window>
